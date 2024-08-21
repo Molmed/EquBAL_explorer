@@ -22,5 +22,5 @@ Install:
 
 Download the files from ---figshare?-- and place them in the following directories:
 
-- raw_data/Dropseq should contain all the Dropseq files (n=20)
-- raw_data/HIVE should contain all the HIVE files (n=13)
+- raw_data/Dropseq : all files from Dropseq folder (n=20)
+- raw_data/HIVE : all files from HIVE folder (n=13)
