@@ -25,5 +25,6 @@ Download the files from ---figshare?-- and place them in the following directori
 - raw_data/Dropseq : all files from Dropseq folder (n=20)
 - raw_data/HIVE : all files from HIVE folder (n=13)
 
-Preprocessing:
-In step 01_preprocessing run the R files in both Dropseq and HIVE directories. Directory custom_code contains certain functions from DoubletFinder package, modified manually due to incompatibility with Seurat v.4. These files do not require any actions. 
+Exceptions:
+
+01_preprocessing/ custom_code contains two functions from DoubletFinder package modified manually due to incompatibility with Seurat v.4. These do not require any actions. 
