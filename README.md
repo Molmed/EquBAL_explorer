@@ -11,7 +11,7 @@ Sequencing data for this project is available at -----. All data has been analyz
 ## Instructions
 The analysis directories are numbered in the order the steps should be executed. Working directory for each script should be the same as the script's location, to align with relative paths.
 
-To run the other scripts in this repository, you will need to do the following.
+To run the other scripts in this repository, you will need to do the following:
 
 Install:
 
