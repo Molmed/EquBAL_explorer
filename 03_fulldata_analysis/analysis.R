@@ -68,7 +68,7 @@ obj_noDP <- subset(obj, cells = setdiff(Cells(obj), cells_to_delete))
 # Annotating major celltypes
 obj <- SetIdent(obj, value = obj$integrated_snn_res.0.1)
 obj <- RenameIdents(object=obj, "0"="Macrophages", "1"="T cells", 
-                    "2"="Proliferating Macrophages", "3"="Unknown", 
+                    "2"="Proliferating Macrophages", "3"="Putative doublets", 
                     "4"="Dendritic cells", "5"="Neutrophils", 
                     "6"="Mast cells", "7"="Dendritic cells", 
                     "8"="Eosinophils")
