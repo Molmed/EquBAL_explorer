@@ -16,7 +16,7 @@ To run the other scripts in this repository, you will need to do the following:
 Install:
 
 - R 3.6.0 and an integrated environment, e.g. RStudio
-- R packages: Seurat v.4.3, DoubletFinder, ShinyCell
+- R packages: Seurat v.4.3 (!), DoubletFinder, ShinyCell
 - Additional R packages required by ShinyCell: data.table, Matrix, hdf5r, reticulate, ggplot2, gridExtra, glue, readr, RColorBrewer, R.utils, shiny, shinyhelper, DT, magrittr, ggdendro
 
 Download the files from ------ and place them in the following directories:

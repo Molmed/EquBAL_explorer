@@ -136,7 +136,7 @@ for (i in 1:20) {
   horse_obj <- FindClusters(object = horse_obj, resolution = 0.1)
   
   # Running PK identification (no ground-truth)
-  sweep.list <- paramSweep(horse_obj, PCs = 1:min.pc, num.cores = 1, sct=T) 
+  sweep.list <- paramSweep(horse_obj, PCs = 1:pcs, num.cores = 1, sct=T) 
   sweep.stats <- summarizeSweep(sweep.list)
   bcmvn <- find.pK(sweep.stats)
   
@@ -152,7 +152,7 @@ for (i in 1:20) {
   nExp.poi.adj <- round(nExp.poi * (1 - homotypic.prop))
   
   # Running DoubletFinder
-  horse_obj <- doubletFinder(seu = horse_obj, PCs = 1:min.pc, pK = optimal.pk, nExp = nExp.poi.adj, sct=T)
+  horse_obj <- doubletFinder(seu = horse_obj, PCs = 1:pcs, pK = optimal.pk, nExp = nExp.poi.adj, sct=T)
   metadata <- horse_obj@meta.data
   colnames(metadata)[11] <- "doublet_finder2"
   horse_obj@meta.data <- metadata
