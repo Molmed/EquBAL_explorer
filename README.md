@@ -1,5 +1,5 @@
-# Equine Asthma Cell Atlas
-Analysis scripts for the Equine Asthma Cell Atlas project 
+# EquBAL explorer
+Analysis scripts for the EquBAL explorer ShinyCell application hosted on SciLifeLab Serve
 
 ## Citation
 This is a public repository containing scripts described in the publication:
