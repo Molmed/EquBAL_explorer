@@ -184,76 +184,124 @@ obj <- CellCycleScoring(obj, s.features = cc.genes.updated.2019$s.genes, g2m.fea
 obj <- SetIdent(obj, value = obj$orig.ident)
 
 # Adding metadata
-DropSeq <- obj
-cells <- (dim(DropSeq)[2])
-DropSeq$method <- rep("DropSeq", times = cells)
 
-subsets <- SplitObject(DropSeq, split.by = "orig.ident")
-total_cells <- c()
-for (i in 1:20) {
-  total_cells <- c(total_cells, dim(subsets[[i]])[2])
-}
+# Method
+cells <- (dim(obj)[2])
+obj$method <- rep("DropSeq", times = cells)
 
-subsets[[1]]$Phenotype1 <- rep("control", times = total_cells[1]) #AS
-subsets[[2]]$Phenotype1 <- rep("control", times = total_cells[2]) #BO
-subsets[[3]]$Phenotype1 <- rep("case", times = total_cells[3]) #CA
-subsets[[4]]$Phenotype1 <- rep("case", times = total_cells[4]) #DO
-subsets[[5]]$Phenotype1 <- rep("control", times = total_cells[5]) #FAN
-subsets[[6]]$Phenotype1 <- rep("case", times = total_cells[6]) #FS
-subsets[[7]]$Phenotype1 <- rep("case", times = total_cells[7]) #FI
-subsets[[8]]$Phenotype1 <- rep("case", times = total_cells[8]) #FLO
-subsets[[9]]$Phenotype1 <- rep("control", times = total_cells[9]) #GU
-subsets[[10]]$Phenotype1 <- rep("control", times = total_cells[10]) #HO
-subsets[[11]]$Phenotype1 <- rep("case", times = total_cells[11]) #ME
-subsets[[12]]$Phenotype1 <- rep("control", times = total_cells[12]) #MY
-subsets[[13]]$Phenotype1 <- rep("case", times = total_cells[13]) #NE
-subsets[[14]]$Phenotype1 <- rep("case", times = total_cells[14]) #OD
-subsets[[15]]$Phenotype1 <- rep("control", times = total_cells[15]) #PR
-subsets[[16]]$Phenotype1 <- rep("control", times = total_cells[16]) #QU
-subsets[[17]]$Phenotype1 <- rep("case", times = total_cells[17]) #TI
-subsets[[18]]$Phenotype1 <- rep("case", times = total_cells[18]) #VA
-subsets[[19]]$Phenotype1 <- rep("case", times = total_cells[19]) #VAL
-subsets[[20]]$Phenotype1 <- rep("case", times = total_cells[20]) #ZI
+# Case/Control
+obj@meta.data[["Phenotype1"]] <- NA
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "AS"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "BO"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "CA"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "DO"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "FS"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "FI"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "FLO"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "GU"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "HO"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "ME"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "MY"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "NE"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "OD"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "PR"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "QU"] <- "control"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "TI"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "VA"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "VAL"] <- "case"  
+obj@meta.data[["Phenotype1"]][obj@meta.data[["orig.ident"]] == "ZI"] <- "case"  
 
-subsets[[1]]$BAL_phenotype <- rep("control", times = total_cells[1]) #AS
-subsets[[2]]$BAL_phenotype <- rep("control", times = total_cells[2]) #BO
-subsets[[3]]$BAL_phenotype <- rep("mastocytic", times = total_cells[3]) #CA
-subsets[[4]]$BAL_phenotype <- rep("mastocytic", times = total_cells[4]) #DO
-subsets[[5]]$BAL_phenotype <- rep("normal_BAL", times = total_cells[5]) #FAN
-subsets[[6]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[6]) #FS
-subsets[[7]]$BAL_phenotype <- rep("normal_BAL", times = total_cells[7]) #FI
-subsets[[8]]$BAL_phenotype <- rep("normal_BAL", times = total_cells[8]) #FLO
-subsets[[9]]$BAL_phenotype <- rep("control", times = total_cells[9]) #GU
-subsets[[10]]$BAL_phenotype <- rep("control", times = total_cells[10]) #HO
-subsets[[11]]$BAL_phenotype <- rep("neutrophilic_mixed", times = total_cells[11]) #ME
-subsets[[12]]$BAL_phenotype <- rep("control", times = total_cells[12]) #MY
-subsets[[13]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[13]) #NE
-subsets[[14]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[14]) #OD
-subsets[[15]]$BAL_phenotype <- rep("control", times = total_cells[15]) #PR
-subsets[[16]]$BAL_phenotype <- rep("control", times = total_cells[16]) #QU
-subsets[[17]]$BAL_phenotype <- rep("mastocytic", times = total_cells[17]) #TI
-subsets[[18]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[18]) #VA
-subsets[[19]]$BAL_phenotype <- rep("mastocytic", times = total_cells[19]) #VAL
-subsets[[20]]$BAL_phenotype <- rep("neutrophilic_mixed", times = total_cells[20]) #ZI
+# BAL phenotype
+obj@meta.data[["BAL_phenotype"]] <- NA
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "AS"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "BO"] <- "neutrophilic_control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "CA"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "DO"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "normal_BAL"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FS"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FI"] <- "normal_BAL_case"   
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FLO"] <- "normal_BAL_case"   
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "GU"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "HO"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "ME"] <- "neutrophilic_mixed"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "MY"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "NE"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "OD"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "PR"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "QU"] <- "control"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "TI"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "VA"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "VAL"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "ZI"] <- "neutrophilic_mixed"  
 
-DropSeq <- merge(subsets[[1]], c(subsets[[2]], 
-                                 subsets[[3]], 
-                                 subsets[[4]],
-                                 subsets[[5]],
-                                 subsets[[6]],
-                                 subsets[[7]], 
-                                 subsets[[8]],
-                                 subsets[[9]],
-                                 subsets[[10]], 
-                                 subsets[[11]],
-                                 subsets[[12]],
-                                 subsets[[13]],
-                                 subsets[[14]],
-                                 subsets[[15]],
-                                 subsets[[16]],
-                                 subsets[[17]],
-                                 subsets[[18]],
-                                 subsets[[19]],
-                                 subsets[[20]]))
+# Age
+obj@meta.data[["Age"]] <- NA
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "AS"] <- 13  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "BO"] <- 10   
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "CA"] <- 12  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "DO"] <- 15  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FAN"] <- 12  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FS"] <- 18  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FI"] <- NA   
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FLO"] <- 9   
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "GU"] <- 17  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "HO"] <- 16  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "ME"] <- 13  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "MY"] <- 14  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "NE"] <- 4  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "OD"] <- 9  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "PR"] <- 18  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "QU"] <- 8  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "TI"] <- 21  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "VA"] <- 6  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "VAL"] <- 25  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "ZI"] <- 14  
 
-saveRDS(DropSeq, "preprocessed_dropseq.rds")
+# Sex
+obj@meta.data[["Sex"]] <- NA
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "AS"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "BO"] <- "M"   
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "CA"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "DO"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FS"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FI"] <- "G"   
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FLO"] <- "G"   
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "GU"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "HO"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "ME"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "MY"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "NE"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "OD"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "PR"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "QU"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "TI"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "VA"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "VAL"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "ZI"] <- "G"  
+
+# Breed
+obj@meta.data[["Breed"]] <- NA
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "AS"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "BO"] <- "Standardbred trotter"   
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "CA"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "DO"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FS"] <- "Swedish Riding Pony"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FI"] <- "Swedish Warmblood"   
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FLO"] <- "Swedish Warmblood"   
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "GU"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "HO"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "ME"] <- "Connemara"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "MY"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "NE"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "OD"] <- "Coldblooded trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "PR"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "QU"] <- "Standardbred trotter"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "TI"] <- "Icelandic horse"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "VA"] <- "Tinker"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "VAL"] <- "Welsh Mountain"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "ZI"] <- "NS Draught Horse"  
+
+saveRDS(obj, "preprocessed_dropseq.rds")

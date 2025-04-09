@@ -160,41 +160,76 @@ obj <- CellCycleScoring(obj, s.features = cc.genes.updated.2019$s.genes, g2m.fea
 obj <- SetIdent(obj, value = obj$orig.ident)
 
 # Adding metadata
-HIVE <- obj
-cells <- (dim(HIVE)[2])
-HIVE$method <- rep("HIVE", times = cells)
-HIVE$Phenotype1 <- rep("case", times = cells)
 
-subsets <- SplitObject(HIVE, split.by = "orig.ident")
-total_cells <- c()
-for (i in 1:13) {
-  total_cells <- c(total_cells, dim(subsets[[i]])[2])
-}
-subsets[[1]]$BAL_phenotype <- rep("mastocytic", times = total_cells[1]) #AM
-subsets[[2]]$BAL_phenotype <- rep("mastocytic", times = total_cells[2]) #BE
-subsets[[3]]$BAL_phenotype <- rep("mastocytic", times = total_cells[3]) #DE
-subsets[[4]]$BAL_phenotype <- rep("mastocytic", times = total_cells[4]) #FA
-subsets[[5]]$BAL_phenotype <- rep("mastocytic", times = total_cells[5]) #FL
-subsets[[6]]$BAL_phenotype <- rep("neutrophilic", times = total_cells[6]) #GN
-subsets[[7]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[7]) #KA20
-subsets[[8]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[8]) #KA30
-subsets[[9]]$BAL_phenotype <- rep("mastocytic_eosinophilic", times = total_cells[9]) #LE
-subsets[[10]]$BAL_phenotype <- rep("normal_BAL", times = total_cells[10]) #NAT
-subsets[[11]]$BAL_phenotype <- rep("mastocytic", times = total_cells[11]) #QU15
-subsets[[12]]$BAL_phenotype <- rep("mastocytic", times = total_cells[12]) #QU30
-subsets[[13]]$BAL_phenotype <- rep("mastocytic", times = total_cells[13]) #ST
+# Method
+cells <- (dim(obj)[2])
+obj$method <- rep("HIVE", times = cells)
 
-HIVE <- merge(subsets[[1]], c(subsets[[2]], 
-                              subsets[[3]], 
-                              subsets[[4]],
-                              subsets[[5]],
-                              subsets[[6]],
-                              subsets[[7]], 
-                              subsets[[8]],
-                              subsets[[9]],
-                              subsets[[10]], 
-                              subsets[[11]],
-                              subsets[[12]],
-                              subsets[[13]]))
+# Case/Control
+obj$Phenotype1 <- rep("case", times = cells)
 
-saveRDS(HIVE, "preprocessed_hive.rds")
+# BAL phenotype
+obj@meta.data[["BAL_phenotype"]] <- NA
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "AM"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "BE"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "DE"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FA"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FL"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "GN"] <- "neutrophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "KA20"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "KA30"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "LE"] <- "mastocytic_eosinophilic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "NAT"] <- "normal_BAL_case"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "QU15"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "QU30"] <- "mastocytic"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "ST"] <- "mastocytic"  
+
+# Age
+obj@meta.data[["Age"]] <- NA
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "AM"] <- 18  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "BE"] <- 12  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "DE"] <- 13  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FA"] <- 8  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "FL"] <- 15  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "GN"] <- 20  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "KA20"] <- 16  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "KA30"] <- 16  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "LE"] <- 13  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "NAT"] <- 5   
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "QU15"] <- 8  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "QU30"] <- 8  
+obj@meta.data[["Age"]][obj@meta.data[["orig.ident"]] == "ST"] <- NA  
+
+# Sex
+obj@meta.data[["Sex"]] <- NA
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "AM"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "BE"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "DE"] <- "M" 
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FA"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "FL"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "GN"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "KA20"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "KA30"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "LE"] <- "G"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "NAT"] <- "M"   
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "QU15"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "QU30"] <- "M"  
+obj@meta.data[["Sex"]][obj@meta.data[["orig.ident"]] == "ST"] <- "G"  
+
+# Breed
+obj@meta.data[["Breed"]] <- NA
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "AM"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "BE"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "DE"] <- "Danish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FA"] <- "Shetland pony"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "FL"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "GN"] <- "Icelandic horse"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "KA20"] <- "Icelandic horse"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "KA30"] <- "Icelandic horse"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "LE"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "NAT"] <- "Icelandic horse"   
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "QU15"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "QU30"] <- "Swedish Warmblood"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "ST"] <- "Welsh pony"  
+
+saveRDS(obj, "preprocessed_hive.rds")
