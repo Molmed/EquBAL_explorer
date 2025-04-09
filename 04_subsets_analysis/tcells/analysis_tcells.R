@@ -77,11 +77,11 @@ obj <- SetIdent(obj, value = obj$SCT_snn_res.0.7)
 obj <- RenameIdents(object=obj, "0"="CD4+ T-cells", 
                     "1"="GZMA+ cytotoxic T-cells", 
                     "2"="γδ T-cells", 
-                    "3"="NK cells / NKT cells", 
+                    "3"="NKT-like cells", 
                     "4"="GZMA+ cytotoxic T-cells", 
-                    "5"="GZMK+ cytotoxic T-cells", 
+                    "5"="GZMK+ T-cells", 
                     "6"="CD4+ ribosomal+ T-cells", 
-                    "7"="KLRB1+- TRDC- cells", 
+                    "7"="KLRB1+ T-cells", 
                     "8"="ISG+ T-cells", 
                     "9"="GZMK+ cytotoxic T-cells")
 obj$CellType_lvl2 <- Idents(object = obj)
