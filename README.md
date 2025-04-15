@@ -4,9 +4,13 @@ Analysis scripts for the EquBAL explorer ShinyCell application hosted on SciLife
 ## Citation
 This is a public repository containing scripts described in the publication:
 
-Raine et al. "-----" https://doi.org/-----
+An Interactive Web Resource for Exploring Equine BAL Cell scRNA-seq Data
+Sulyaeva J., Fegraeus K., Riihimäki M., Nordlund J., Raine A. (2025)
+
+The funding for this study was provided by [FORMAS](https://formas.se).
+  
 ## Data
-Sequencing data for this project is available at -----. All data has been analyzed on a high performance cluster (HPC) using R. The resulting analysis datasets are available at -----.
+Sequencing data for this project is available at -----. All data has been analyzed on a high performance cluster (HPC) using R. The resulting analysis datasets are available at ----.
 
 ## Instructions
 The analysis directories are numbered in the order the steps should be executed. Working directory for each script should be the same as the script's location, to align with relative paths.
