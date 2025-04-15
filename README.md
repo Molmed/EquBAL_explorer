@@ -2,9 +2,9 @@
 Analysis scripts for the EquBAL explorer ShinyCell application hosted on SciLifeLab Serve
 
 ## Citation
-This is a public repository containing scripts described in the publication:
+This is a public repository containing scripts for the analysis described in the publication:
 
-An Interactive Web Resource for Exploring Equine BAL Cell scRNA-seq Data
+__An Interactive Web Resource for Exploring Equine BAL Cell scRNA-seq Data__
 Sulyaeva J., Fegraeus K., Riihimäki M., Nordlund J., Raine A. (2025)
 
 The funding for this study was provided by [FORMAS](https://formas.se).
