@@ -218,7 +218,7 @@ obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "AS"] <- "cont
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "BO"] <- "neutrophilic_control"  
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "CA"] <- "mastocytic"  
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "DO"] <- "mastocytic"  
-obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "normal_BAL"  
+obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FAN"] <- "control"  
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FS"] <- "mastocytic_eosinophilic"  
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FI"] <- "normal_BAL_case"   
 obj@meta.data[["BAL_phenotype"]][obj@meta.data[["orig.ident"]] == "FLO"] <- "normal_BAL_case"   
