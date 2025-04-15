@@ -230,6 +230,6 @@ obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "LE"] <- "Swedish Warm
 obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "NAT"] <- "Icelandic horse"   
 obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "QU15"] <- "Swedish Warmblood"  
 obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "QU30"] <- "Swedish Warmblood"  
-obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "ST"] <- "Welsh pony"  
+obj@meta.data[["Breed"]][obj@meta.data[["orig.ident"]] == "ST"] <- "Welsh Mountain"  
 
 saveRDS(obj, "preprocessed_hive.rds")
