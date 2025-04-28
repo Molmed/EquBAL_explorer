@@ -65,6 +65,58 @@ clust0_0 <- subset(clust0, subset = integrated_snn_res.0.3 == 0)
 cells_to_delete <- colnames(clust0_0)
 obj_noDP <- subset(obj, cells = setdiff(Cells(obj), cells_to_delete))
 
+# Reclustering cleaned dataset (res 0.1-1.0)
+
+# Running PCA
+obj <- RunPCA(obj_noDP)
+
+# Calculating significant PCs
+stdv <- obj[["pca"]]@stdev
+sum.stdv <- sum(obj[["pca"]]@stdev)
+percent.stdv <- (stdv / sum.stdv) * 100
+cumulative <- cumsum(percent.stdv)
+co1 <- which(cumulative > 90 & percent.stdv < 5)[1]
+co2 <- sort(which((percent.stdv[1:length(percent.stdv) - 1] - percent.stdv[2:length(percent.stdv)]) > 0.1), decreasing = T)[1] + 1
+pcs <- min(co1, co2)
+
+# Running UMAP, clustering
+obj <- RunUMAP(obj, reduction = "pca", dims = 1:pcs)
+obj <- FindNeighbors(obj, reduction = "pca", dims = 1:pcs)
+obj <- FindClusters(obj, resolution = seq(0.1, 1.0, by=0.1))
+
+# Running FindAllMarkers on every resolution
+DefaultAssay(object = obj) <- "SCT"
+Idents(object = obj) <- "integrated_snn_res.0.1"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.1 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.1")
+Idents(object = obj) <- "integrated_snn_res.0.2"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.2 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.2")
+Idents(object = obj) <- "integrated_snn_res.0.3"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.3 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.3")
+Idents(object = obj) <- "integrated_snn_res.0.4"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.4 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.4")
+Idents(object = obj) <- "integrated_snn_res.0.5"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.5 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.5")
+Idents(object = obj) <- "integrated_snn_res.0.6"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.6 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.6")
+Idents(object = obj) <- "integrated_snn_res.0.7"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.7 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.7")
+Idents(object = obj) <- "integrated_snn_res.0.8"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.8 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.8")
+Idents(object = obj) <- "integrated_snn_res.0.9"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.0.9 <- FindAllMarkers(obj, group.by = "integrated_snn_res.0.9")
+Idents(object = obj) <- "integrated_snn_res.1"
+obj <- PrepSCTFindMarkers(obj)
+markers_res.1.0 <- FindAllMarkers(obj, group.by = "integrated_snn_res.1")
+
 # Annotating major celltypes
 obj <- SetIdent(obj, value = obj$integrated_snn_res.0.1)
 obj <- RenameIdents(object=obj, "0"="Macrophages", "1"="T cells", 
